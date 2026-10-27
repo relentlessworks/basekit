@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>basekit — Agentic-first base encoding service</title>
+<style>
+:root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff; --green: #3fb950; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+.hero { text-align: center; padding: 3rem 0 2rem; }
+.hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+.hero .tagline { color: var(--muted); font-size: 1.2rem; margin-bottom: 1.5rem; }
+.badges { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.badge { background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 0.25rem 0.75rem; font-size: 0.85rem; color: var(--muted); }
+.cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.cta a { padding: 0.6rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: opacity 0.2s; }
+.cta a:hover { opacity: 0.85; }
+.cta .primary { background: var(--accent); color: #fff; }
+.cta .secondary { background: var(--card); border: 1px solid var(--border); color: var(--text); }
+section { padding: 2rem 0; }
+section h2 { font-size: 1.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+.card h3 { color: var(--accent); font-size: 1rem; margin-bottom: 0.25rem; }
+.card p { color: var(--muted); font-size: 0.9rem; }
+code { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 0.15rem 0.4rem; font-family: 'SF Mono', Consolas, monospace; font-size: 0.9em; }
+pre { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; overflow-x: auto; margin: 0.5rem 0; }
+pre code { background: none; border: none; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 0.5rem 0; }
+th, td { text-align: left; padding: 0.5rem; border-bottom: 1px solid var(--border); }
+th { color: var(--muted); font-weight: 600; }
+.footer { text-align: center; padding: 2rem 0; color: var(--muted); border-top: 1px solid var(--border); margin-top: 2rem; }
+.footer a { color: var(--accent); text-decoration: none; }
+@media (max-width: 600px) { .hero h1 { font-size: 1.8rem; } .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <h1>basekit</h1>
+    <p class="tagline">Agentic-first base encoding &amp; decoding service</p>
+    <div class="badges">
+      <span class="badge">Go</span>
+      <span class="badge">Single Binary</span>
+      <span class="badge">No Database</span>
+      <span class="badge">Plain Text API</span>
+      <span class="badge">MCP</span>
+    </div>
+    <div class="cta">
+      <a class="primary" href="https://github.com/relentlessworks/basekit">View on GitHub</a>
+      <a class="secondary" href="https://github.com/relentlessworks/basekit#readme">Read the Docs</a>
+    </div>
+  </div>
+
+  <section>
+    <h2>Principles</h2>
+    <div class="grid">
+      <div class="card"><h3>Agent IS the Interface</h3><p>No UI, no SDK. The API is the product.</p></div>
+      <div class="card"><h3>Plain Text by Default</h3><p>One labeled, grepable line per record. JSON on demand.</p></div>
+      <div class="card"><h3>Instructive Errors</h3><p>Every 4xx includes a hint for self-correction.</p></div>
+      <div class="card"><h3>Self-Documenting</h3><p>GET /help returns a one-page operating manual.</p></div>
+      <div class="card"><h3>Single Binary</h3><p>Go, CGO_ENABLED=0, zero dependencies.</p></div>
+      <div class="card"><h3>Zero Config</h3><p>Runs out of the box. Config via flags or env.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Supported Encodings</h2>
+    <table>
+      <thead><tr><th>Encoding</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>base64</code></td><td>Standard Base64</td></tr>
+        <tr><td><code>base64url</code></td><td>URL-safe Base64 (- and _)</td></tr>
+        <tr><td><code>base32</code></td><td>Standard Base32 (RFC 4648)</td></tr>
+        <tr><td><code>base32hex</code></td><td>Hex Base32 (0-9A-V)</td></tr>
+        <tr><td><code>base58</code></td><td>Bitcoin Base58 (no 0, O, I, l)</td></tr>
+        <tr><td><code>base85</code></td><td>ASCII85 (Base85)</td></tr>
+        <tr><td><code>hex</code></td><td>Hexadecimal encoding</td></tr>
+        <tr><td><code>url</code></td><td>URL percent-encoding</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Quick Start</h2>
+    <pre><code># Build
+make build
+
+# Run
+./basekit
+
+# Encode
+curl -X POST 'http://localhost:7700/encode?encoding=base64&data=hello'
+# encoding=base64 input=hello output=aGVsbG8=
+
+# Decode
+curl -X POST 'http://localhost:7700/decode?encoding=base64&data=aGVsbG8='
+# encoding=base64 input=aGVsbG8= output=hello
+
+# Convert
+curl -X POST 'http://localhost:7700/convert?from=hex&to=base64&data=68656c6c6f'
+# from=hex to=base64 input=68656c6c6f output=aGVsbG8=
+
+# Detect
+curl -X POST 'http://localhost:7700/detect?data=aGVsbG8='
+# encoding=base64</code></pre>
+  </section>
+
+  <section>
+    <h2>Configuration</h2>
+    <table>
+      <thead><tr><th>Flag</th><th>Env</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>-addr</code></td><td><code>BASEKIT_ADDR</code></td><td><code>:7700</code></td><td>Listen address</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="footer">
+    <p><a href="https://github.com/relentlessworks/basekit">github.com/relentlessworks/basekit</a></p>
+    <p>MIT License &middot; Built by relentlessworks</p>
+  </div>
+</div>
+</body>
+</html>
